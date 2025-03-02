@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Student List</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            background-color: #f5f5f5; 
+            margin: 0; 
+            padding: 0; 
+        }
+
+        .container { 
+            width: 80%; 
+            margin: 20px auto; 
+            background: white; 
+            padding: 20px; 
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
+            border-radius: 8px; 
+        }
+
+        h2 { 
+            text-align: center; 
+            color: #333; 
+        }
+
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 20px; 
+        }
+
+        table, th, td { 
+            border: 1px solid #ddd; 
+            padding: 10px; 
+            text-align: left; 
+        }
+
+        th { 
+            background-color: #333; 
+            color: white; 
+        }
+
+        td a { 
+            text-decoration: none; 
+            padding: 5px 10px; 
+            display: inline-block; 
+        }
+
+        .btn { 
+            padding: 8px 15px; 
+            border-radius: 5px; 
+            text-decoration: none; 
+            font-size: 14px; 
+            display: inline-block; 
+            text-align: center; 
+        }
+
+        .btn-primary { 
+            background-color: #007bff; 
+            color: white; 
+        }
+
+        .btn-warning { 
+            background-color: #f0ad4e; 
+            color: white; 
+        }
+
+        .btn-danger { 
+            background-color: #d9534f; 
+            color: white; 
+            border-radius: 5px;
+            padding: 8px 15px;
+            transition: 0.3s ease-in-out;
+        }
+
+        .btn-danger:hover { 
+            background-color: #c9302c; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Student List</h2>
+        <a href="{% url 'student_create' %}" class="btn btn-primary">Add New Student</a>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Course</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <td>
+                        <a href="{% url 'student_update' student.id %}">
+                            {{ student.first_name }} {{ student.middle_initial|default_if_none:"" }} {{ student.last_name }}
+                        </a>
+                    </td>
+                    <td>{{ student.email }}</td>
+                    <td>{{ student.course }}</td>
+                    <td>
+                        <a href="{% url 'student_update' student.id %}" class="btn btn-warning">Edit</a>
+                        <a href="{% url 'student_confirm_delete' student.id %}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

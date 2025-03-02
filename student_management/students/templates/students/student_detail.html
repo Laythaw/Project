@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Student Detail</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            background-color: #f5f5f5; 
+            margin: 0; 
+            padding: 0; }
+
+        .container { 
+            width: 50%; 
+            margin: 20px auto; 
+            background: white; 
+            padding: 20px; 
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
+            border-radius: 8px; }
+
+        h2 { 
+            text-align: center; 
+            color: #333; }
+
+        .btn { 
+            padding: 8px 15px; 
+            border-radius: 5px; 
+            text-decoration: none; 
+            font-size: 14px; }
+
+        .btn-primary { 
+            background-color: #007bff; 
+            color: white; }
+
+        .btn-warning { 
+            background-color: #f0ad4e; 
+            color: white; }
+
+        .btn-danger { 
+            background-color: #d9534f; 
+            color: white; }
+
+        .btn-secondary { 
+            background-color: #6c757d; 
+            color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>{{ student.first_name }}  {{ student.middle_initial|default_if_none:"" }} {{ student.last_name }}</h2>
+        <p><strong>Email:</strong> {{ student.email }}</p>
+        <p><strong>Date of Birth:</strong> {{ student.date_of_birth }}</p>
+        <p><strong>Course:</strong> {{ student.course }}</p>
+        <p><strong>Enrollment Date:</strong> {{ student.enrollment_date }}</p>
+
+        <a href="{% url 'student_update' student.id %}" class="btn btn-warning">Edit</a>
+        <a href="{% url 'student_delete' student.id %}" class="btn btn-danger">Delete</a>
+        <a href="{% url 'student_list' %}" class="btn btn-secondary">Back to List</a>
+    </div>
+</body>
+</html>
